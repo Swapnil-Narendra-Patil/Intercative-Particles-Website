@@ -1,54 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Interactive particles text create with three.js</title>
-  <link rel="stylesheet" href="./style.css">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Interactive particles text create with three.js</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <script type="x-shader/x-vertex" id="vertexshader">
 
-</head>
-<body>
+      attribute float size;
+      attribute vec3 customColor;
+      varying vec3 vColor;
 
-<script type="x-shader/x-vertex" id="vertexshader">
+      void main() {
 
-  attribute float size;
-  attribute vec3 customColor;
-  varying vec3 vColor;
+        vColor = customColor;
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = size * ( 300.0 / -mvPosition.z );
+        gl_Position = projectionMatrix * mvPosition;
 
-  void main() {
+      }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshader">
 
-    vColor = customColor;
-    vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-    gl_PointSize = size * ( 300.0 / -mvPosition.z );
-    gl_Position = projectionMatrix * mvPosition;
+      uniform vec3 color;
+      uniform sampler2D pointTexture;
 
-  }
+      varying vec3 vColor;
 
-</script>
-<script type="x-shader/x-fragment" id="fragmentshader">
+      void main() {
 
- uniform vec3 color;
- uniform sampler2D pointTexture;
+        gl_FragColor = vec4( color * vColor, 1.0 );
+        gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
 
- varying vec3 vColor;
+      }
+    </script>
 
- void main() {
-
-   gl_FragColor = vec4( color * vColor, 1.0 );
-   gl_FragColor = gl_FragColor * texture2D( pointTexture, gl_PointCoord );
-
- }
-</script>
-
-<div id="magic"></div>
-<div class="playground">
-  <div class="bottomPosition">
-    
-        <h1 class="special">SWAPNIL PATIL <br><span class="minText">Software Engineering Student</span></h1>
+    <div id="magic"></div>
+    <div class="playground">
+      <div class="bottomPosition">
+        <h1 class="special">
+          SWAPNIL PATIL <br /><span class="minText"
+            >Software Engineering Student</span
+          >
+        </h1>
         <h3>Have Fun</h3>
-  </div>
-</div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js'></script><script  src="./script.js"></script>
-
-</body>
+      </div>
+    </div>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
 </html>
