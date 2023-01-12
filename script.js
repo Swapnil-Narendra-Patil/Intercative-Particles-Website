@@ -97,7 +97,7 @@ class CreateParticles {
 
 		this.data = {
 
-			text: 'HELLO FROM\n   SWAPNIL',
+			text: "DON'T CLICK \n       HERE",
 			amount: 1500,
 			particleSize: 1,
 			particleColor: 0xffffff,
